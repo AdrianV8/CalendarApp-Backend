@@ -4,14 +4,19 @@ const Evento = require('../models/evento-model')
 //! Obtener eventos
 const getEventos = async( req, res = response ) => {
 
-    // Rescatar todos los eventos con sus propiedades
-    const eventos = await Evento.find()
-                                .populate('user','name email')
+    const { uid } = req.params;
 
-    console.log(eventos);
+    // Rescatar todos los eventos con sus propiedades
+    const eventos = await Evento.find().populate('user','name email')
+
+    // Filtro para retornar solo los eventos de un usuario o de otro
+    const eventosUsuario = eventos.filter( event => event.user._id.toString() === uid)
+
+    console.log(eventosUsuario);
+
     return res.status(200).json({
         ok: true,
-        eventos
+        eventosUsuario
     })
 }
 
