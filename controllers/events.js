@@ -12,8 +12,6 @@ const getEventos = async( req, res = response ) => {
     // Filtro para retornar solo los eventos de un usuario o de otro
     const eventosUsuario = eventos.filter( event => event.user._id.toString() === uid)
 
-    console.log(eventosUsuario);
-
     return res.status(200).json({
         ok: true,
         eventosUsuario
@@ -137,14 +135,6 @@ const borrarEvento = async( req, res = response ) => {
             msg: "Error. Hable con el administrador."
         })
     }
-
-
-
-    return res.status(200).json({
-        ok: true,
-        params: req.params,
-        msg: 'borrarEvento'
-    })
 }
 
 
